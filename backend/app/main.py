@@ -1,14 +1,26 @@
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file in the parent directory
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import os
 
 app = FastAPI()
 
-# Database setup
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/dbname")
+# Determine if we're in production or development environment
+is_production = os.getenv("ENVIRONMENT", "development").lower() == "production"
+
+# Set DATABASE_URL based on the environment
+if is_production:
+    DATABASE_URL = os.getenv("PRODUCTION_URL", "postgresql://user:password@localhost/dbname")
+else:
+    DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/dbname")
+    
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
