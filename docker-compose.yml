@@ -22,7 +22,3 @@ services:
       - DATABASE_URL=postgresql+psycopg2s://carbon_storage_user:${POSTGRES_PASSWORD}@gpu1:3030/carbon_storage
       - PRODUCTION_URL=postgresql+psycopg2://carbon_storage_user:${POSTGRES_PASSWORD}@carbon-storage-db-k4g8848:3030/carbon_storage
       - ENVIRONMENT=production
-
-networks:
-  default:
-    name: carbon_storage_network
