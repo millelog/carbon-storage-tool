@@ -20,8 +20,6 @@ services:
       - "8000:8000"
     environment:
       - DATABASE_URL=postgresql://carbon_storage_user:${POSTGRES_PASSWORD}@gpu1:3031/carbon_storage
-    depends_on:
-      - db
 
 volumes:
   postgres_data:
