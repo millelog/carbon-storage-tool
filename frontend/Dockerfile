@@ -1,45 +1,29 @@
 # Build stage
-FROM node:16-alpine as build
-
-# Install pnpm
-RUN npm install -g pnpm
+FROM node:18-alpine as build
 
 # Set working directory
 WORKDIR /app
 
-# Copy the root package.json, pnpm-lock.yaml, and pnpm-workspace.yaml
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
-# Copy the frontend package.json
-COPY frontend/package.json ./frontend/
+# Install dependencies
+RUN npm ci
 
-# List contents of current directory for debugging
-RUN ls -la
-
-# Install dependencies with verbose output
-RUN pnpm install --no-frozen-lockfile --verbose
-
-# Copy the rest of the application code
+# Copy the rest of the frontend application code
 COPY . .
 
-# List contents of frontend directory for debugging
-RUN ls -la frontend
-
-# Build the frontend application
-WORKDIR /app/frontend
-RUN pnpm run build
+# Build the application
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
 # Copy the build output to replace the default nginx contents
-COPY --from=build /app/frontend/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose port 3000
-EXPOSE 3000
-
-# Copy the custom nginx configuration
-COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
+# Expose port 80
+EXPOSE 80
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]

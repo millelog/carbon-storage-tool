@@ -6,7 +6,7 @@
         "request": "launch",
         "name": "Launch Frontend",
         "cwd": "${workspaceFolder}/frontend",
-        "runtimeExecutable": "pnpm",
+        "runtimeExecutable": "npm",
         "runtimeArgs": ["run", "dev"],
         "console": "integratedTerminal",
         "skipFiles": ["<node_internals>/**"],
