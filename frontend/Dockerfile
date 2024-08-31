@@ -13,11 +13,17 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 # Copy the frontend package.json
 COPY frontend/package.json ./frontend/
 
-# Install dependencies
-RUN pnpm install
+# List contents of current directory for debugging
+RUN ls -la
+
+# Install dependencies with verbose output
+RUN pnpm install --no-frozen-lockfile --verbose
 
 # Copy the rest of the application code
 COPY . .
+
+# List contents of frontend directory for debugging
+RUN ls -la frontend
 
 # Build the frontend application
 WORKDIR /app/frontend
