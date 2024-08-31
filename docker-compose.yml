@@ -8,7 +8,7 @@ services:
     ports:
       - "80:80"
     environment:
-      - VITE_API_URL=http://backend:8000
+      - VITE_API_URL=http://backend:8020
     depends_on:
       - backend
 
@@ -17,7 +17,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8020:8000"
     environment:
       - DATABASE_URL=postgresql://carbon_storage_user:${POSTGRES_PASSWORD}@localhost:3031/carbon_storage
 
