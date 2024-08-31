@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+    environment:
+      - VITE_API_URL=http://backend:8000
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://carbon_storage_user:${POSTGRES_PASSWORD}@gpu1:3031/carbon_storage
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: carbon_storage_network
