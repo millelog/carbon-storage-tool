@@ -3,8 +3,8 @@ from typing import List, Dict, Optional
 import geopandas as gpd
 import fiona
 import json
-from config import settings
-from schemas import LayerInfo
+from app.config import settings
+from app.schemas import LayerInfo
 from functools import lru_cache
 
 router = APIRouter()

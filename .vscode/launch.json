@@ -19,7 +19,7 @@
         "request": "launch",
         "name": "Launch Backend",
         "cwd": "${workspaceFolder}/backend",
-        "program": "${workspaceFolder}/backend/app/main.py",
+        "program": "${workspaceFolder}/backend/main.py",
         "args": ["--reload"],
         "console": "integratedTerminal",
         "justMyCode": true,
