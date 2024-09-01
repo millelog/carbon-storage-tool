@@ -17,10 +17,6 @@ RUN apt-get update && apt-get install -y \
     libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set GDAL_VERSION env var
-RUN export GDAL_VERSION=$(gdal-config --version) && \
-    echo "export GDAL_VERSION=${GDAL_VERSION}" >> /etc/profile
-
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
