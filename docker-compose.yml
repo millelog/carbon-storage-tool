@@ -6,7 +6,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-      - VITE_API_URL=https://carbon.loganmiller.dev
+      - VITE_API_URL=https://carbon.loganmiller.dev/api
     ports:
       - "8030:80"
     depends_on:
