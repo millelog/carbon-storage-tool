@@ -12,14 +12,8 @@ from sqlalchemy.orm import sessionmaker
 
 app = FastAPI()
 
-# Determine if we're in production or development environment
-is_production = os.getenv("ENVIRONMENT", "development").lower() == "production"
-
-# Set DATABASE_URL based on the environment
-if is_production:
-    DATABASE_URL = os.getenv("PRODUCTION_URL", "postgresql://user:password@localhost/dbname")
-else:
-    DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/dbname")
+gdb_path = os.getenv('PROD_GDB') if os.getenv('ENVIRONMENT') == 'production' else os.getenv('DEV_GDB')
+DATABASE_URL = os.getenv("PRODUCTION_URL" if os.getenv("ENVIRONMENT", "development").lower() == "production" else "DATABASE_URL", "postgresql://user:password@localhost/dbname")
     
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

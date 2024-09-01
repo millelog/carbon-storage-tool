@@ -8,15 +8,25 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies and GDAL
 RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
+    software-properties-common \
+    gdal-bin \
+    libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# Set GDAL_VERSION env var
+RUN export GDAL_VERSION=$(gdal-config --version) && \
+    echo "export GDAL_VERSION=${GDAL_VERSION}" >> /etc/profile
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Install GDAL Python bindings
+RUN pip install GDAL==$(gdal-config --version)
 
 # Copy project
 COPY . .

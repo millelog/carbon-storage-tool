@@ -22,3 +22,7 @@ services:
       - DATABASE_URL=postgresql+psycopg2s://carbon_storage_user:${POSTGRES_PASSWORD}@gpu1:3030/carbon_storage
       - PRODUCTION_URL=postgresql+psycopg2://carbon_storage_user:${POSTGRES_PASSWORD}@192.168.70.100:3030/carbon_storage
       - ENVIRONMENT=production
+      - DEV_GDB=H:\carbon\Carbon_Storage_Site_Mapping_Inquiry_Tool_Geodatabase_v3.gdb
+      - PROD_GDB=/var/carbon-db/Carbon_Storage_Site_Mapping_Inquiry_Tool_Geodatabase_v3.gdb
+    volumes:
+      - /home/millelog/carbon-db:/var/carbon-db
