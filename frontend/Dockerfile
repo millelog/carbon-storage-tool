@@ -13,6 +13,10 @@ RUN npm ci
 # Copy the rest of the frontend application code
 COPY . .
 
+# Add build argument for VITE_API_URL
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Build the application
 RUN npm run build
 
