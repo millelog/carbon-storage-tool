@@ -24,5 +24,6 @@ services:
       - ENVIRONMENT=production
       - DEV_GDB=H:\carbon\Carbon_Storage_Site_Mapping_Inquiry_Tool_Geodatabase_v3.gdb
       - PROD_GDB=/var/carbon-db/Carbon_Storage_Site_Mapping_Inquiry_Tool_Geodatabase_v3.gdb
+      - FRONTEND_URL=https://carbon.loganmiller.dev
     volumes:
       - /home/millelog/carbon-db:/var/carbon-db
