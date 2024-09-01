@@ -44,7 +44,7 @@ function Map({ layerName }: { layerName: string }) {
   if (error) return <div>Error loading map data: {error}</div>;
 
   return (
-    <MapContainer center={[0, 0]} zoom={2} style={{ height: '400px', width: '100%' }}>
+    <MapContainer center={[39.8097343, -98.5556199]} zoom={3} style={{ height: '100%', width: '100%' }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {geoJsonData && <GeoJSON data={geoJsonData} />}
     </MapContainer>
@@ -87,45 +87,53 @@ function App() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">GDB Viewer</h1>
-      <Card>
-        <CardHeader>
-          <CardTitle>Layer Selection</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Select value={selectedLayer} onValueChange={setSelectedLayer}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a layer" />
-            </SelectTrigger>
-            <SelectContent>
-              {layers.map((layer) => (
-                <SelectItem key={layer.name} value={layer.name}>
-                  {layer.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </CardContent>
-      </Card>
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>Map View</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {selectedLayer && <Map layerName={selectedLayer} />}
-        </CardContent>
-      </Card>
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>Layer Information</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Button onClick={() => alert(`Selected Layer: ${selectedLayer}`)}>
-            Show Layer Info
-          </Button>
-        </CardContent>
-      </Card>
+    <div className="flex flex-col h-screen w-screen">
+      <header className="bg-gray-800 text-white p-4">
+        <h1 className="text-3xl font-bold">Carbon Storage Site Mapping Inquiry Tool</h1>
+      </header>
+      <div className="flex flex-1 flex-col sm:flex-row overflow-hidden">
+        <div className="sm:w-1/4 w-full p-4 overflow-y-auto">
+          <Card className="mb-4">
+            <CardHeader>
+              <CardTitle>Layer Selection</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Select value={selectedLayer} onValueChange={setSelectedLayer}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a layer" />
+                </SelectTrigger>
+                <SelectContent>
+                  {layers.map((layer) => (
+                    <SelectItem key={layer.name} value={layer.name}>
+                      {layer.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Layer Information</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => alert(`Selected Layer: ${selectedLayer}`)}>
+                Show Layer Info
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="flex-1 p-4">
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Map View</CardTitle>
+            </CardHeader>
+            <CardContent className="h-[calc(100%-4rem)]">
+              {selectedLayer && <Map key={selectedLayer} layerName={selectedLayer} />}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
