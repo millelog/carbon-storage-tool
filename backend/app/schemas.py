@@ -14,3 +14,8 @@ class FeatureInfo(BaseModel):
     id: int
     properties: Dict[str, Any]
     geometry: Dict[str, Any]
+class DetailedLayerInfo(BaseModel):
+    name: str
+    geometry_type: str
+    feature_count: int
+    attributes: List[str]

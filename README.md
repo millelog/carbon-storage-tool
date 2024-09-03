@@ -93,5 +93,3 @@ Production deployment is handled using Docker Compose.
 - For production, review Docker Compose logs: `docker-compose logs`
 - Ensure all required environment variables are set correctly for each environment
 - Verify that the geodatabase file paths are correct for your environment
-
-For more detailed information, refer to the documentation in the `docs` directory.

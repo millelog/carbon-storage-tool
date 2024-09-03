@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.endpoints import router
 import os
 
+
 app = FastAPI()
 
 # Add CORS middleware
