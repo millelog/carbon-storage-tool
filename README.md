@@ -7,22 +7,17 @@ An interactive web application for exploring potential carbon storage sites, bui
 ### Prerequisites
 - Node.js (v18+)
 - Python (v3.12+)
+- PostgreSQL with PostGIS extension
 - Docker and Docker Compose (for production deployment)
 - Visual Studio Code (for development)
 
 ## Development Environment
 
-The development environment is set up to run using Visual Studio Code's launch configurations.
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/your-username/carbon-storage-tool.git
-   cd carbon-storage-tool
-   ```
+1. Clone the repository and navigate to the project directory.
 
 2. Set up environment variables:
-   - Create a `.env` file in the root directory
-   - Add necessary environment variables (e.g., `DEV_GDB`)
+   - Copy `.env.example` to `.env` in both `frontend` and `backend` directories
+   - Fill in the necessary variables in each `.env` file
 
 3. Frontend Setup:
    - Navigate to the `frontend` directory
@@ -30,66 +25,47 @@ The development environment is set up to run using Visual Studio Code's launch c
    - Start the development server: `npm run dev`
 
 4. Backend Setup:
-   - Open the project in Visual Studio Code
-   - Ensure you have the Python extension installed
-   - Setup python environment: `python -m venv .venv && source .venv/bin/activate`
+   - Navigate to the `backend` directory
+   - Create and activate a virtual environment
    - Install dependencies: `pip install -r requirements.txt`
-   - Use the provided `launch.json` configuration to start the backend server
+   - Start the backend server: `uvicorn main:app --reload`
 
-5. Access the application at `http://localhost:5173` (or the port specified by Vite)
+5. Access the application at `http://localhost:5173`
 
 ## Production Deployment
 
-Production deployment is handled using Docker Compose.
-
-1. Ensure Docker and Docker Compose are installed on your production server
+1. Ensure Docker and Docker Compose are installed on your production server.
 
 2. Set up environment variables:
-   - Create a `.env` file in the root directory
-   - Add production-specific variables (`POSTGRES_PASSWORD`)
+   - Update `.env` files in `frontend` and `backend` directories with production values
+   - Ensure `POSTGRES_PASSWORD` is set in the frontend's deployment environment
 
 3. Build and run with Docker Compose:
    ```
    docker-compose up --build
    ```
 
-4. Access the application at the specified production URL
+## New Features
 
-## Features
-
-- Interactive mapping of potential carbon storage sites
-- Geospatial data visualization using Leaflet
-- Dynamic layer selection and rendering
-- Backend API for processing geodatabase files
-
-## Tech Stack
-
-- Frontend: React, TypeScript, Vite, Leaflet, shadcn UI
-- Backend: FastAPI, GeoPandas
-- Database: PostgreSQL with PostGIS (for future implementations)
-- Containerization: Docker (for production)
+- In-memory caching for improved performance
+- Support for multiple geometry types (Point, LineString, Polygon)
+- Layer-specific styling in the frontend
+- Detailed property information display for each feature
 
 ## Project Structure
 
-- `frontend/`: React application code
-- `backend/`: FastAPI application code
-- `.vscode/launch.json`: VS Code launch configurations for development
+- `frontend/`: React application with Leaflet integration
+- `backend/`: FastAPI application with PostgreSQL and PostGIS
 - `docker-compose.yml`: Production deployment configuration
 
 ## Environment Variables
 
-- Development:
-  - `DEV_GDB`: Path to the development geodatabase file
-  - `VITE_API_URL`: Backend API URL for development (typically http://localhost:8000)
-
-- Production:
-  - `PROD_GDB`: Path to the production geodatabase file
-  - `POSTGRES_PASSWORD`: Database password for production
-  - `VITE_API_URL`: Backend API URL for production
+Refer to `.env.example` files in `frontend` and `backend` directories for required variables.
 
 ## Troubleshooting
 
-- For development issues, check VS Code's Debug Console and terminal output
-- For production, review Docker Compose logs: `docker-compose logs`
-- Ensure all required environment variables are set correctly for each environment
-- Verify that the geodatabase file paths are correct for your environment
+- Check application logs for errors
+- Verify database connections and PostGIS setup
+- Ensure all environment variables are correctly set
+
+For more detailed information, refer to the README files in the `frontend` and `backend` directories.
