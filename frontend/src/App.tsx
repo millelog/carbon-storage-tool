@@ -113,6 +113,7 @@ function App() {
           ...baseStyle,
           fillColor: undefined,
           fillOpacity: undefined,
+          weight: 2,
         };
       case 'Polygon':
       case 'MultiPolygon':
