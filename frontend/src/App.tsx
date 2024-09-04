@@ -96,7 +96,7 @@ function App() {
 
   const getLayerStyle = useCallback((feature: any) => {
     const baseStyle = {
-      radius: 8,
+      radius: 4,
       fillColor: "#ff7800",
       color: "#000",
       weight: 1,
