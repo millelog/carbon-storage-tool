@@ -6,6 +6,8 @@ import * as L from 'leaflet';
 import LayerInfo from './components/LayerInfo';
 import { Loader2 } from "lucide-react"
 import 'leaflet/dist/leaflet.css';
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 
 interface BasicLayer {
   name: string;
@@ -176,6 +178,23 @@ function App() {
             </CardContent>
           </Card>
           {selectedLayer && layerSchema && <LayerInfo schema={layerSchema} />}
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle>Project Repository</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Button variant="outline" className="w-full" asChild>
+                <a
+                  href="https://github.com/millelog/carbon-storage-tool"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  View on GitHub
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
         <div className="flex-1 p-4 relative">
           <Card className="h-full">
