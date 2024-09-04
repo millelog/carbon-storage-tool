@@ -2,6 +2,12 @@
 
 An interactive web application for exploring potential carbon storage sites, built with React, Leaflet, and FastAPI.
 
+
+## Live Demo
+
+A live demonstration of the Carbon Storage Site Mapping Tool can be accessed at [carbon.loganmiller.dev](https://carbon.loganmiller.dev).
+
+
 ## Quick Start
 
 ### Prerequisites
